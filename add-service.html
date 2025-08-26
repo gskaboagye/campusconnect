@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add Service - CampusConnect</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="container header">
+    <h1 class="brand">Add a Service</h1>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="listings.html">Browse Services</a>
+      <a href="add-service.html" class="btn">Add Service</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <form id="addServiceForm" class="card form">
+      <div class="row">
+        <label>Service Title</label>
+        <input type="text" id="title" placeholder="e.g., Laundry Service" required />
+      </div>
+      <div class="row">
+        <label>Description</label>
+        <textarea id="description" placeholder="What do you offer?" required></textarea>
+      </div>
+      <div class="row">
+        <label>Price (GH₵)</label>
+        <input type="text" id="price" placeholder="e.g., 10 per bucket" required />
+      </div>
+      <div class="row">
+        <label>Category</label>
+        <select id="category" required>
+          <option value="Food">Food</option>
+          <option value="Laundry">Laundry</option>
+          <option value="Tutoring">Tutoring</option>
+          <option value="Printing">Printing</option>
+          <option value="Fashion">Fashion</option>
+          <option value="Delivery">Delivery</option>
+          <option value="Tech">Tech</option>
+          <option value="Beauty">Beauty</option>
+          <option value="Repairs">Repairs</option>
+        </select>
+      </div>
+      <div class="row">
+        <label>University</label>
+        <select id="university" required></select>
+      </div>
+      <div class="row">
+        <label>Hostel / Hall Name</label>
+        <input type="text" id="hostel" placeholder="e.g., Unity Hall" required />
+      </div>
+      <div class="row">
+        <label>Contact (Phone/WhatsApp)</label>
+        <input type="text" id="contact" placeholder="e.g., 0541234567" required />
+      </div>
+      <div class="row">
+        <label>Image URL (optional)</label>
+        <input type="url" id="image" placeholder="https://example.com/photo.jpg" />
+      </div>
+      <button type="submit" class="btn">Add Service</button>
+    </form>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© 2025 CampusConnect</p>
+    </div>
+  </footer>
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

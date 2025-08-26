@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CampusConnect- Home</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="container header">
+    <h1 class="brand">CampusConnect</h1>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="listings.html">Browse Services</a>
+      <a href="add-service.html" class="btn">Add Service</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero card">
+      <h2>Find & Offer Services in Your Campus</h2>
+      <div class="search-row">
+        <input type="text" id="searchBar" placeholder="Search services (e.g., laundry, tutoring)" />
+        <button class="btn" onclick="searchServices()">Search</button>
+      </div>
+      <p class="muted">Verified student marketplace for Ghanaian universities.</p>
+    </section>
+
+    <section class="categories">
+      <h3>Browse by Category</h3>
+      <div class="grid grid-6">
+        <a class="pill" href="listings.html?category=Food">🍔 Food</a>
+        <a class="pill" href="listings.html?category=Laundry">🧺 Laundry</a>
+        <a class="pill" href="listings.html?category=Tutoring">📘 Tutoring</a>
+        <a class="pill" href="listings.html?category=Printing">🖨️ Printing</a>
+        <a class="pill" href="listings.html?category=Fashion">👗 Fashion</a>
+        <a class="pill" href="listings.html?category=Delivery">🚴 Delivery</a>
+      </div>
+    </section>
+
+    <section class="quick-grid">
+      <h3>Popular right now</h3>
+      <div id="popularContainer" class="grid grid-3"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© 2025 CampusConnect • Built for Ghanaian Universities</p>
+    </div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

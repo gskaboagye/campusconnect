@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CampusConnect - Listings</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="container header">
+    <h1 class="brand">Service Listings</h1>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="listings.html">Browse Services</a>
+      <a href="add-service.html" class="btn">Add Service</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="filters card">
+      <div class="row">
+        <label for="universityFilter">University</label>
+        <select id="universityFilter"></select>
+      </div>
+      <div class="row">
+        <label for="categoryFilter">Category</label>
+        <select id="categoryFilter">
+          <option value="all">All</option>
+          <option value="Food">Food</option>
+          <option value="Laundry">Laundry</option>
+          <option value="Tutoring">Tutoring</option>
+          <option value="Printing">Printing</option>
+          <option value="Fashion">Fashion</option>
+          <option value="Delivery">Delivery</option>
+          <option value="Tech">Tech</option>
+          <option value="Beauty">Beauty</option>
+          <option value="Repairs">Repairs</option>
+        </select>
+      </div>
+      <div class="row">
+        <input id="searchInput" type="text" placeholder="Search title or description" />
+        <button class="btn" onclick="applyFilters()">Apply</button>
+      </div>
+    </div>
+
+    <div id="listingsContainer" class="grid grid-3"></div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© 2025 CampusConnect</p>
+    </div>
+  </footer>
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
