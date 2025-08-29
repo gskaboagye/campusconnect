@@ -21,14 +21,17 @@
 
   <main class="container">
     <div id="serviceDetails" class="card"></div>
-    <div class="details-actions">
+
+    <div class="details-actions container" style="margin-top:12px; display:flex; gap:12px; justify-content:flex-start;">
       <button id="contactBtn" class="btn"><i class="fas fa-phone"></i> Contact Provider</button>
-      <button id="favBtn" class="btn ghost"><i class="fas fa-heart"></i> Add to Favorites</button>
+      <button class="btn ghost" onclick="clearExtras()" title="Clear local saved services">🗑️ Clear Saved (local)</button>
     </div>
   </main>
 
   <footer class="site-footer">
-    <div class="container footer-inner"><div class="footer-col"><h4>Now</h4><p id="dateTimeSmall4"></p></div></div>
+    <div class="container footer-inner">
+      <div class="footer-col"><h4>Now</h4><p id="dateTimeSmall4"></p></div>
+    </div>
     <div class="container copy"><small>© 2025 CampusConnect</small></div>
   </footer>
 

@@ -42,7 +42,7 @@ html,body{height:100%;margin:0;font-family:Inter, Poppins, system-ui, Arial, san
   padding: 120px 20px;
   color: #fff;
   background: linear-gradient(135deg, rgba(74,0,224,0.8), rgba(138,43,226,0.8)),
-              url("images/hero-bg.jpg") center/cover no-repeat;
+              url("hero.jpg") center/cover no-repeat;
   background-attachment: fixed;
   overflow: hidden;
 }
@@ -150,9 +150,35 @@ html,body{height:100%;margin:0;font-family:Inter, Poppins, system-ui, Arial, san
 .section-cats{padding:20px 0}
 
 /* pills */
-.pill-grid{display:flex;flex-wrap:wrap;gap:10px}
-.pill{background:#fff;padding:10px 14px;border-radius:999px;border:1px solid var(--border);display:inline-flex;align-items:center;gap:8px;cursor:pointer;transition:all .18s}
-.pill:hover{transform:translateY(-4px);box-shadow:0 8px 20px rgba(74,0,224,0.08)}
+.pill {
+  background: #fff;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all .25s ease;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.pill i {
+  color: var(--accent);
+}
+
+.pill:hover {
+  background: var(--primary);
+  color: #fff;
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(74,0,224,0.12);
+}
+
+.pill:hover i {
+  color: #ffd54f;
+}
+
 
 /* cards grid */
 .services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;margin-top:12px}
@@ -171,7 +197,7 @@ html,body{height:100%;margin:0;font-family:Inter, Poppins, system-ui, Arial, san
 
 /* form */
 .form-card{max-width:900px;margin:28px auto;padding:18px}
-.form-row{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+.form-row{Display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
 .form-row input, .form-row textarea, .form-row select{padding:12px;border-radius:8px;border:1px solid var(--border)}
 
 /* form helpers */
@@ -352,4 +378,118 @@ html,body{height:100%;margin:0;font-family:Inter, Poppins, system-ui, Arial, san
   .nav a{display:block;margin:8px 0}
   .hero h1{font-size:1.6rem}
   .two-cols{grid-template-columns:1fr}
+}
+
+/* =======================
+   Dynamic Service Cards
+   ======================= */
+.service-card {
+  background: var(--card);
+  border-radius: 14px;
+  padding: 18px;
+  text-decoration: none;
+  color: var(--text);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.service-card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.12);
+}
+
+.service-card h4 {
+  margin: 0 0 6px;
+  color: var(--primary);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.service-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* Danger / delete button consistent style */
+.btn.danger {
+  background: #e63946;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn.danger:hover {
+  background: #d62828;
+  transform: translateY(-2px);
+}
+
+.btn.danger:active {
+  background: #b71c1c;
+  transform: translateY(0);
+}
+
+
+/* Service Details Page */
+#serviceDetails {
+  padding: 2rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+  margin: 2rem 0;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+#serviceDetails h2 {
+  margin-top: 0;
+  font-size: 1.8rem;
+  color: #4a90e2;
+}
+
+#serviceDetails p {
+  margin: 0.4rem 0;
+  color: #555;
+  line-height: 1.6;
+}
+
+.details-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.details-actions .btn,
+.details-actions button {
+  padding: 0.7rem 1.2rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+#contactBtn {
+  background: #4caf50;
+  color: white;
+}
+
+#contactBtn:hover {
+  background: #43a047;
+}
+
+.details-actions button:last-child {
+  background: #e74c3c;
+  color: white;
+}
+
+.details-actions button:last-child:hover {
+  background: #c0392b;
 }
