@@ -1,34 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Service Details - CampusConnect</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CampusConnect — Service Details</title>
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
-  <header class="container header">
-    <h1 class="brand">Service Details</h1>
-    <nav class="nav">
-      <a href="index.html">Home</a>
-      <a href="listings.html">Browse Services</a>
-      <a href="add-service.html" class="btn">Add Service</a>
-    </nav>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand"><i class="fas fa-info-circle"></i> <span>Service Details</span></div>
+      <nav class="nav">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="listings.html"><i class="fas fa-list"></i> Browse</a>
+      </nav>
+    </div>
   </header>
 
   <main class="container">
     <div id="serviceDetails" class="card"></div>
-    <div class="actions">
-      <button class="btn" id="contactBtn">📞 Contact Provider</button>
-      <a class="btn ghost" href="listings.html">← Back to Listings</a>
+    <div class="details-actions">
+      <button id="contactBtn" class="btn"><i class="fas fa-phone"></i> Contact Provider</button>
+      <button id="favBtn" class="btn ghost"><i class="fas fa-heart"></i> Add to Favorites</button>
     </div>
   </main>
 
-  <footer class="footer">
-    <div class="container">
-      <p>© 2025 CampusConnect</p>
-    </div>
+  <footer class="site-footer">
+    <div class="container footer-inner"><div class="footer-col"><h4>Now</h4><p id="dateTimeSmall4"></p></div></div>
+    <div class="container copy"><small>© 2025 CampusConnect</small></div>
   </footer>
+
   <script src="data.js"></script>
   <script src="script.js"></script>
 </body>
