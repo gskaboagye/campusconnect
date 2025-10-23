@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CampusConnect — Service Details</title>
+  <link rel="stylesheet" href="styles/styles.css" />
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand"><i class="fas fa-info-circle"></i> <span>Service Details</span></div>
+      <nav class="nav">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="listings.html"><i class="fas fa-list"></i> Browse</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div id="serviceDetails" class="card"></div>
+
+    <div class="details-actions container" style="margin-top:12px; display:flex; gap:12px; justify-content:flex-start;">
+      <button id="contactBtn" class="btn"><i class="fas fa-phone"></i> Contact Provider</button>
+      <button class="btn ghost" onclick="clearExtras()" title="Clear local saved services">🗑️ Clear Saved (local)</button>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-col"><h4>Now</h4><p id="dateTimeSmall4"></p></div>
+    </div>
+    <div class="container copy"><small>© 2025 CampusConnect</small></div>
+  </footer>
+
+  <script src="script/data.js"></script>
+  <script src="script/script.js"></script>
+</body>
+</html>
