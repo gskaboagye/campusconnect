@@ -2,78 +2,96 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>CampusConnect — Home</title>
-  <link rel="stylesheet" href="styles/styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CampusConnect — Find & Offer Services on Campus</title>
+
+  <!-- SEO & Meta -->
+  <meta name="description" content="CampusConnect connects students to on-campus services like laundry, food, tutoring, and more — all by students, for students.">
+  <meta name="author" content="Godfred Sefa Aboagye">
+  <meta name="theme-color" content="#4a00e0">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="styles/styles.css">
+
   <!-- Font Awesome -->
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
+  <!-- Header -->
   <header class="site-header">
     <div class="container header-inner">
-      <div class="brand">
+      <a href="index.html" class="brand" aria-label="CampusConnect Home">
         <i class="fas fa-graduation-cap"></i>
         <span>CampusConnect</span>
-      </div>
+      </a>
 
-      <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
         <i class="fas fa-bars"></i>
       </button>
 
-      <nav class="nav" id="mainNav">
-        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+      <nav class="nav" id="mainNav" aria-label="Main navigation">
+        <a href="index.html" class="active"><i class="fas fa-home"></i> Home</a>
         <a href="listings.html"><i class="fas fa-list"></i> Browse</a>
         <a href="add-service.html" class="btn"><i class="fas fa-plus-circle"></i> Add Service</a>
-        <button id="themeToggle" class="icon-btn" title="Toggle theme"><i class="fas fa-moon"></i></button>
+        <button id="themeToggle" class="icon-btn" title="Toggle dark/light mode">
+          <i class="fas fa-moon"></i>
+        </button>
       </nav>
     </div>
   </header>
 
-<main>
-  <section class="hero">
-    <div class="container hero-inner">
-      <h1 class="animate-title">Find & Offer Services on Campus</h1>
-      <p class="lead animate-sub">Laundry, food, tutoring, printing and more — all by students for students.</p>
+  <!-- Hero Section -->
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <h1 class="animate-title">Find & Offer Services on Campus</h1>
+        <p class="lead animate-sub">
+          Laundry, food, tutoring, printing and more — all by students for students.
+        </p>
 
-      <div class="search-row animate-search">
-        <input id="searchBar" placeholder="Search services, categories or hostels..." />
-        <select id="homeCategory">
-          <option value="">All categories</option>
-        </select>
-        <button class="btn" onclick="searchFromHome()">
-          <i class="fas fa-search"></i> Search
-        </button>
+        <div class="search-row animate-search">
+          <input id="searchBar" placeholder="Search services, categories or hostels..." aria-label="Search bar">
+          <select id="homeCategory" aria-label="Service category">
+            <option value="">All categories</option>
+          </select>
+          <button class="btn" onclick="searchFromHome()" aria-label="Search">
+            <i class="fas fa-search"></i> Search
+          </button>
+        </div>
       </div>
-    </div>
-  </section>
-</main>
+    </section>
 
-
+    <!-- Popular Services -->
     <section class="container section-popular">
-      <h2><i class="fas fa-star"></i> Popular services</h2>
+      <h2><i class="fas fa-star"></i> Popular Services</h2>
       <div id="popularContainer" class="services-grid"></div>
     </section>
 
+    <!-- Quick Categories -->
     <section class="container section-cats">
-      <h3>Quick categories</h3>
+      <h3>Quick Categories</h3>
       <div class="pill-grid" id="categoryPills"></div>
     </section>
   </main>
 
+  <!-- Footer -->
   <footer class="site-footer">
     <div class="container footer-inner">
       <div class="footer-col">
-        <h4>Quick links</h4>
+        <h4>Quick Links</h4>
         <ul>
           <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
           <li><a href="listings.html"><i class="fas fa-list"></i> Listings</a></li>
-          <li><a href="add-service.html"><i class="fas fa-plus-circle"></i> Add service</a></li>
+          <li><a href="add-service.html"><i class="fas fa-plus-circle"></i> Add Service</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
-        <h4>Follow us</h4>
+        <h4>Follow Us</h4>
         <div class="social-icons">
           <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
           <a href="#" title="X / Twitter"><i class="fab fa-x-twitter"></i></a>
@@ -92,10 +110,11 @@
     </div>
 
     <div class="container copy">
-      <small>© 2025 CampusConnect — Built for students</small>
+      <small>© 2025 CampusConnect — Built for students by Godfred Sefa Aboagye</small>
     </div>
   </footer>
 
+  <!-- Scripts -->
   <script src="script/data.js"></script>
   <script src="script/script.js"></script>
 </body>

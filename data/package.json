@@ -1,19 +1,35 @@
 {
   "name": "campusconnect-backend",
   "version": "1.0.0",
-  "description": "Simple Express backend for CampusConnect",
+  "description": "A lightweight Express.js backend API for CampusConnect — a university service marketplace platform.",
   "main": "server.js",
+  "type": "module",
   "scripts": {
-    "start": "node server.js",
+    "start": "NODE_ENV=production node server.js",
     "dev": "nodemon server.js"
   },
+  "keywords": [
+    "express",
+    "api",
+    "backend",
+    "campus",
+    "university",
+    "marketplace",
+    "nodejs"
+  ],
+  "author": "Godfred Sefa Aboagye",
+  "license": "MIT",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "express": "^4.18.2",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "nodemon": "^3.1.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
 

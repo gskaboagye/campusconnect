@@ -2,87 +2,141 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CampusConnect — Add Service</title>
+
+  <!-- Meta Tags for SEO -->
+  <meta name="description" content="Add your service to CampusConnect — where students offer and discover campus-based services easily.">
+  <meta name="author" content="Godfred Sefa Aboagye">
+  <meta name="theme-color" content="#4a00e0">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+  <!-- Styles -->
   <link rel="stylesheet" href="styles/styles.css" />
-  <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
+
 <body>
+  <!-- Header -->
   <header class="site-header">
     <div class="container header-inner">
-      <div class="brand"><i class="fas fa-plus-circle"></i> <span>Add Service</span></div>
-      <button class="menu-toggle" id="menuToggle3"><i class="fas fa-bars"></i></button>
-      <nav class="nav" id="mainNav3">
+      <a href="index.html" class="brand" aria-label="CampusConnect Home">
+        <i class="fas fa-graduation-cap"></i>
+        <span>CampusConnect</span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle3" aria-label="Toggle menu">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <nav class="nav" id="mainNav3" aria-label="Main navigation">
         <a href="index.html"><i class="fas fa-home"></i> Home</a>
         <a href="listings.html"><i class="fas fa-list"></i> Browse</a>
       </nav>
     </div>
   </header>
 
+  <!-- Main Content -->
   <main class="container">
-    <form id="addServiceForm" class="card form-card">
-      <h2><i class="fas fa-edit"></i> Add your service</h2>
+    <form id="addServiceForm" class="card form-card" aria-labelledby="formHeading">
+      <h2 id="formHeading"><i class="fas fa-edit"></i> Add Your Service</h2>
+      <p class="form-intro">Fill out the details below to post your service and reach students on campus.</p>
 
+      <!-- Title -->
       <div class="form-row">
-        <label>Title</label>
-        <input id="title" required placeholder="e.g., Laundry service" />
+        <label for="title">Title</label>
+        <input id="title" name="title" required placeholder="e.g., Laundry service" />
       </div>
 
+      <!-- Description -->
       <div class="form-row">
-        <label>Description</label>
-        <textarea id="description" required placeholder="Short description"></textarea>
+        <label for="description">Description</label>
+        <textarea id="description" name="description" required placeholder="Short description of your service"></textarea>
       </div>
 
+      <!-- Price & Category -->
       <div class="form-row two-cols">
         <div>
-          <label>Price (GH₵)</label>
-          <input id="price" required placeholder="e.g., 10" />
+          <label for="price">Price (GH₵)</label>
+          <input id="price" name="price" type="number" min="0" step="0.01" required placeholder="e.g., 10" />
         </div>
         <div>
-          <label>Category</label>
-          <select id="category">
+          <label for="category">Category</label>
+          <select id="category" name="category" required>
             <option value="">Select category</option>
           </select>
         </div>
       </div>
 
+      <!-- University & Hostel -->
       <div class="form-row two-cols">
         <div>
-          <label>University</label>
-          <select id="university"></select>
+          <label for="university">University</label>
+          <select id="university" name="university" required></select>
         </div>
         <div>
-          <label>Hostel / Hall</label>
-          <input id="hostel" placeholder="e.g., Unity Hall" />
+          <label for="hostel">Hostel / Hall</label>
+          <input id="hostel" name="hostel" placeholder="e.g., Unity Hall" />
         </div>
       </div>
 
+      <!-- Contact -->
       <div class="form-row">
-        <label>Contact (phone / WhatsApp)</label>
-        <input id="contact" placeholder="e.g., 0541234567" />
+        <label for="contact">Contact (Phone / WhatsApp)</label>
+        <input id="contact" name="contact" type="tel" pattern="[0-9]{10}" placeholder="e.g., 0541234567" />
       </div>
 
+      <!-- Image -->
       <div class="form-row">
-        <label>Image URL (optional)</label>
-        <input id="image" placeholder="https://..." />
+        <label for="image">Image URL (optional)</label>
+        <input id="image" name="image" type="url" placeholder="https://..." />
       </div>
 
+      <!-- Submit -->
       <div class="form-actions">
-        <button class="btn" type="submit"><i class="fas fa-paper-plane"></i> Submit</button>
+        <button class="btn" type="submit" aria-label="Submit service form">
+          <i class="fas fa-paper-plane"></i> Submit
+        </button>
       </div>
     </form>
   </main>
 
+  <!-- Footer -->
   <footer class="site-footer">
     <div class="container footer-inner">
-      <div class="footer-col"><h4>Quick links</h4><ul><li><a href="index.html">Home</a></li></ul></div>
-      <div class="footer-col"><h4>Follow</h4><div class="social-icons"><a href="#"><i class="fab fa-facebook"></i></a></div></div>
-      <div class="footer-col"><h4>Now</h4><p id="dateTimeSmall3"></p></div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="listings.html"><i class="fas fa-list"></i> Listings</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Follow Us</h4>
+        <div class="social-icons">
+          <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Now</h4>
+        <p id="dateTimeSmall3"></p>
+      </div>
     </div>
-    <div class="container copy"><small>© 2025 CampusConnect</small></div>
+
+    <div class="container copy">
+      <small>© 2025 CampusConnect — Built for students by Godfred Sefa Aboagye</small>
+    </div>
   </footer>
 
+  <!-- Scripts -->
   <script src="script/data.js"></script>
   <script src="script/script.js"></script>
 </body>

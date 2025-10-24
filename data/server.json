@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "title": "Room Cleaning",
+    "description": "Daily hostel room cleaning service",
+    "price": "30",
+    "category": "Household",
+    "university": "University of Ghana",
+    "hostel": "Pent",
+    "image": "images/cleaning.jpg",
+    "createdAt": "2025-08-29"
+  },
+  {
+    "id": 2,
+    "title": "Tutoring",
+    "description": "Maths tutoring for SHS students",
+    "price": "50",
+    "category": "Education",
+    "university": "KNUST",
+    "hostel": "SRC",
+    "image": "images/tutoring.jpg",
+    "createdAt": "2025-08-28"
+  },
+  {
+    "id": 3,
+    "title": "Laundry Pickup",
+    "description": "Quick and affordable hostel laundry pickup and delivery.",
+    "price": "25",
+    "category": "Household",
+    "university": "University of Cape Coast (UCC)",
+    "hostel": "Casford",
+    "image": "images/laundry.jpg",
+    "createdAt": "2025-09-02"
+  },
+  {
+    "id": 4,
+    "title": "Graphic Design Services",
+    "description": "Logos, flyers, and posters for student businesses.",
+    "price": "80",
+    "category": "Design",
+    "university": "University of Education, Winneba (UEW)",
+    "hostel": "Simpa",
+    "image": "images/design.jpg",
+    "createdAt": "2025-09-10"
+  },
+  {
+    "id": 5,
+    "title": "Catering",
+    "description": "Healthy and delicious meal prep for campus students.",
+    "price": "60",
+    "category": "Food",
+    "university": "University for Development Studies (UDS)",
+    "hostel": "Bamahu",
+    "image": "images/food.jpg",
+    "createdAt": "2025-09-05"
+  }
+]
