@@ -3,125 +3,65 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Browse verified campus services — laundry, printing, tutoring, and more. CampusConnect connects students with trusted services on campus." />
-  <link rel="canonical" href="https://gskaboagye.github.io/campusconnect/listings.html" />
-  <meta property="og:title" content="CampusConnect — Service Listings" />
-  <meta property="og:description" content="Discover campus services and student-run businesses." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://gskaboagye.github.io/campusconnect/listings.html" />
-  <meta property="og:image" content="https://gskaboagye.github.io/campusconnect/images/hero.jpg" />
-  <title>CampusConnect — Service Listings</title>
+  <meta name="description" content="Browse all student and business services across Ghanaian universities on CampusConnect." />
+  <title>CampusConnect — Listings</title>
 
   <link rel="stylesheet" href="styles/styles.css" />
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
-  <link rel="stylesheet" 
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" 
-        integrity="sha512-7r+N4yQnA0UvF7FzS3UeD+AI0H1r+2UBQZ5OdfXg/y6tLMuJExaR9rcRA+CSGg6WwLuwOzOjCO2zK5LJpKD0g==" 
-        crossorigin="anonymous" 
-        referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
 </head>
-
 <body>
-  <!-- Header -->
   <header class="site-header">
     <div class="container header-inner">
       <div class="brand">
-        <i class="fas fa-list"></i> <span>Service Listings</span>
+        <i class="fas fa-list"></i> Browse Services
       </div>
-
-      <button class="menu-toggle" id="menuToggle2" aria-label="Toggle navigation menu">
-        <i class="fas fa-bars"></i>
-      </button>
-
-      <nav class="nav" id="mainNav2" role="navigation">
+      <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+      <nav class="nav">
         <a href="index.html"><i class="fas fa-home"></i> Home</a>
-        <a href="listings.html" class="active"><i class="fas fa-list"></i> Browse</a>
-        <a href="add-service.html" class="btn"><i class="fas fa-plus-circle"></i> Add Service</a>
-        <button id="themeToggle2" class="icon-btn" title="Toggle theme" aria-label="Toggle theme">
-          <i class="fas fa-moon"></i>
-        </button>
+        <a href="add-service.html"><i class="fas fa-plus-circle"></i> Add</a>
+        <a href="about.html"><i class="fas fa-info-circle"></i>About Us</a>
       </nav>
     </div>
   </header>
 
-  <!-- Main Content -->
   <main class="container">
-    <section class="filters card">
+    <section class="filters">
       <h2><i class="fas fa-filter"></i> Filter Services</h2>
       <div class="filters-row">
-        <div class="field">
-          <label for="universityFilter"><i class="fas fa-university"></i> University</label>
-          <select id="universityFilter" aria-label="Filter by university"></select>
-        </div>
-
-        <div class="field">
-          <label for="categoryFilter"><i class="fas fa-tags"></i> Category</label>
-          <select id="categoryFilter">
-            <option value="all">All</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label for="sortFilter"><i class="fas fa-sort"></i> Sort</label>
-          <select id="sortFilter">
-            <option value="relevance">Relevance</option>
-            <option value="price">Price (Low → High)</option>
-            <option value="alpha">Alphabetical</option>
-            <option value="newest">Newest</option>
-          </select>
-        </div>
-
-        <div class="field search-field">
-          <label for="searchInput"><i class="fas fa-search"></i> Search</label>
-          <input id="searchInput" placeholder="Search title or description" />
-        </div>
-      </div>
-
-      <div class="filters-actions">
-        <button class="btn" onclick="applyFilters()"><i class="fas fa-filter"></i> Apply</button>
-        <button class="btn ghost" onclick="clearFilters()"><i class="fas fa-eraser"></i> Clear</button>
-        <button class="btn ghost" onclick="clearLocalExtras()" title="Clear local saved services">
-          Clear Saved (local)
-        </button>
+        <select id="categoryFilter"></select>
+        <select id="universityFilter"></select>
+        <input type="text" id="searchInput" placeholder="Search services..." />
+        <select id="sortFilter">
+          <option value="relevance">Sort by Relevance</option>
+          <option value="price-low-high">Price: Low to High</option>
+          <option value="price-high-low">Price: High to Low</option>
+          <option value="alpha">A–Z</option>
+          <option value="newest">Newest</option>
+        </select>
+        <button class="btn" onclick="applyFilters()"><i class="fas fa-sync"></i> Apply</button>
+        <button class="btn ghost" onclick="clearFilters()"><i class="fas fa-times"></i> Clear</button>
       </div>
     </section>
 
-    <section aria-label="Service Listings">
-      <div id="listingsContainer" class="services-grid"></div>
+    <section id="listingsContainer" class="services-grid">
+      <div class="card"><p>Loading services...</p></div>
     </section>
   </main>
 
-  <!-- Footer -->
   <footer class="site-footer">
     <div class="container footer-inner">
-      <div class="footer-col">
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-          <li><a href="add-service.html"><i class="fas fa-plus-circle"></i> Add Service</a></li>
-        </ul>
+          <div>
+        <h4><i class="fas fa-clock"></i> Current Time</h4>
+        <p id="dateTimeSmall"></p>
       </div>
-
-      <div class="footer-col">
-        <h4>Follow</h4>
-        <div class="social-icons">
-          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" aria-label="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
-          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-        </div>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
       </div>
-
-      <div class="footer-col">
-        <h4>Now</h4>
-        <p id="dateTimeSmall2"></p>
-      </div>
-    </div>
-    <div class="container copy">
-      <small>© 2025 CampusConnect — Built for Students</small>
     </div>
   </footer>
 
-  <!-- Scripts -->
   <script src="script/data.js"></script>
   <script src="script/script.js"></script>
 </body>

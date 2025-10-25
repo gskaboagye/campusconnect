@@ -1,192 +1,190 @@
-/* script.js — CampusConnect (Static JSON version for GitHub Pages)
+/* =======================================================
+   CampusConnect — Main Frontend Script
    Author: Godfred Sefa Aboagye
-   Version: 1.1
-   Description: Uses local static JSON for services listing on GitHub Pages
-*/
+   Updated by: ChatGPT
+   Version: 1.5 (with About Page Integration)
+   ======================================================= */
 
-// Helper shortcuts
+// ------------------------------
+// Helper Shortcuts
+// ------------------------------
 const qs = s => document.querySelector(s);
 const qsa = s => Array.from(document.querySelectorAll(s));
 
 // ------------------------------
-// Configuration
+// Config
 // ------------------------------
-const API = 'data/services.json'; // Static JSON file in /data/
+const API = 'data/services.json';
 const LS_FAVS = 'cc_favs';
 const LS_THEME = 'cc_theme';
 
 // ------------------------------
-// LocalStorage helpers
+// LocalStorage Helpers
 // ------------------------------
-function loadFavs() {
-  try {
-    return JSON.parse(localStorage.getItem(LS_FAVS) || '[]');
-  } catch {
-    return [];
-  }
-}
-function saveFavs(arr) {
-  localStorage.setItem(LS_FAVS, JSON.stringify(arr));
-}
+const loadFavs = () => JSON.parse(localStorage.getItem(LS_FAVS) || '[]');
+const saveFavs = favs => localStorage.setItem(LS_FAVS, JSON.stringify(favs));
 
 // ------------------------------
-// Fetch services from static JSON
-// ------------------------------
-async function fetchServicesFromBackend(filters = {}) {
-  const res = await fetch(API);
-  if (!res.ok) throw new Error('Failed to load local services.json');
-  let services = await res.json();
-
-  // Apply filters
-  if (filters.category && filters.category !== 'all') {
-    services = services.filter(s => s.category === filters.category);
-  }
-  if (filters.university && filters.university !== 'all') {
-    services = services.filter(s => s.university === filters.university);
-  }
-  if (filters.search) {
-    const q = filters.search.toLowerCase();
-    services = services.filter(
-      s =>
-        s.title.toLowerCase().includes(q) ||
-        s.description.toLowerCase().includes(q)
-    );
-  }
-  if (filters.sort === 'price-low-high') {
-    services.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
-  } else if (filters.sort === 'price-high-low') {
-    services.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
-  }
-  return services;
-}
-
-// ------------------------------
-// UI helpers: date/time, theme, menu
+// Date & Time
 // ------------------------------
 function startDateTime() {
-  const els = qsa('[id^="dateTimeSmall"], #dateTimeSmall');
+  const els = qsa('#dateTime, #dateTimeSmall, #dateTimeAbout');
+  if (!els.length) return;
   const tick = () => {
     const now = new Date();
-    els.forEach(el => (el.textContent = now.toLocaleString()));
+    const formatted = now.toLocaleString('en-GB', {
+      weekday: 'short',
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    });
+    els.forEach(el => (el.textContent = formatted));
   };
   tick();
   setInterval(tick, 1000);
 }
 
+// ------------------------------
+// Theme Toggle
+// ------------------------------
 function initTheme() {
   const saved = localStorage.getItem(LS_THEME) || 'light';
   if (saved === 'dark') document.documentElement.classList.add('dark');
 
-  qsa('#themeToggle, #themeToggle2').forEach(btn => {
-    if (!btn) return;
-    btn.addEventListener('click', () => {
+  qsa('#themeToggle, #themeToggle2, #themeToggle3').forEach(btn => {
+    btn?.addEventListener('click', () => {
       document.documentElement.classList.toggle('dark');
       localStorage.setItem(
         LS_THEME,
         document.documentElement.classList.contains('dark') ? 'dark' : 'light'
       );
-      const i = btn.querySelector('i');
-      if (i) i.classList.toggle('fa-moon'), i.classList.toggle('fa-sun');
+      const icon = btn.querySelector('i');
+      if (icon) icon.classList.toggle('fa-sun'), icon.classList.toggle('fa-moon');
     });
   });
 }
 
+// ------------------------------
+// Mobile Menu
+// ------------------------------
 function initMobileMenu() {
   qsa('.menu-toggle').forEach(btn => {
     btn.addEventListener('click', () => {
       const nav = btn.nextElementSibling;
-      if (nav) nav.classList.toggle('open');
+      nav?.classList.toggle('open');
+      btn.querySelector('i')?.classList.toggle('fa-times');
+      btn.querySelector('i')?.classList.toggle('fa-bars');
     });
   });
 }
 
 // ------------------------------
-// Universities (Complete Public List - Ghana)
+// Fetch Services
 // ------------------------------
-const universities = [
-  'University of Ghana',
-  'Kwame Nkrumah University of Science and Technology (KNUST)',
-  'University of Cape Coast (UCC)',
-  'University for Development Studies (UDS)',
-  'University of Education, Winneba (UEW)',
-  'University of Mines and Technology (UMaT)',
-  'University of Energy and Natural Resources (UENR)',
-  'University of Health and Allied Sciences (UHAS)',
-  'C.K. Tedam University of Technology and Applied Sciences (CKT-UTAS)',
-  'Simon Diedong Dombo University of Business and Integrated Development Studies (SDD-UBIDS)',
-  'Akenten Appiah-Menka University of Skills Training and Entrepreneurial Development (AAMUSTED)',
-  'Ghana Institute of Journalism (GIJ)',
-  'Ghana Institute of Management and Public Administration (GIMPA)',
-  'University of Professional Studies, Accra (UPSA)',
-  'Kwame Nkrumah University of Science and Technology Obuasi Campus',
-  'University for Environment and Sustainable Development (UESD)'
-];
+async function fetchServicesFromBackend(filters = {}) {
+  try {
+    const res = await fetch(API);
+    if (!res.ok) throw new Error('Failed to load local services.json');
+    let services = await res.json();
 
+    // Filtering
+    if (filters.category && filters.category !== 'all')
+      services = services.filter(s => s.category === filters.category);
+
+    if (filters.university && filters.university !== 'all')
+      services = services.filter(s => s.university === filters.university);
+
+    if (filters.search) {
+      const q = filters.search.toLowerCase();
+      services = services.filter(
+        s => s.title.toLowerCase().includes(q) || s.description.toLowerCase().includes(q)
+      );
+    }
+
+    // Sorting
+    switch (filters.sort) {
+      case 'price-low-high':
+        services.sort((a, b) => a.price - b.price);
+        break;
+      case 'price-high-low':
+        services.sort((a, b) => b.price - a.price);
+        break;
+      case 'alpha':
+        services.sort((a, b) => a.title.localeCompare(b.title));
+        break;
+      case 'newest':
+        services.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+        break;
+    }
+
+    return services;
+  } catch (err) {
+    console.error('Error fetching services:', err);
+    return [];
+  }
+}
+
+// ------------------------------
+// Populate Universities
+// ------------------------------
 function populateUniversities() {
+  const unis = window.CampusConnectData?.universities || [];
   qsa('#universityFilter, #university, #universityFilter2').forEach(sel => {
     if (!sel) return;
     sel.innerHTML = '<option value="all">All</option>';
-    universities.forEach(u => {
-      const o = document.createElement('option');
-      o.value = u;
-      o.textContent = u;
-      sel.appendChild(o);
+    unis.forEach(u => {
+      const opt = document.createElement('option');
+      opt.value = u;
+      opt.textContent = u;
+      sel.appendChild(opt);
     });
   });
 }
 
 // ------------------------------
-// Categories from JSON
+// Populate Categories
 // ------------------------------
 async function populateCategories() {
   try {
     const services = await fetchServicesFromBackend();
+    const fromData = window.CampusConnectData?.categories || [];
     const cats = Array.from(
-      new Set((services || []).map(s => s.category).filter(Boolean))
+      new Set([...fromData, ...services.map(s => s.category).filter(Boolean)])
     ).sort();
 
     qsa('#categoryFilter, #category, #homeCategory').forEach(sel => {
       if (!sel) return;
       sel.innerHTML = '';
-      const defaultOpt =
+      const def =
         sel.id === 'categoryFilter'
           ? new Option('All', 'all')
           : new Option('-- all --', '');
-      sel.appendChild(defaultOpt);
+      sel.appendChild(def);
       cats.forEach(c => sel.appendChild(new Option(c, c)));
     });
-
-    const pillContainer = qs('#categoryPills');
-    if (pillContainer) {
-      pillContainer.innerHTML = '';
-      cats.forEach(c => {
-        const btn = document.createElement('button');
-        btn.className = 'pill';
-        btn.textContent = c;
-        btn.onclick = () => {
-          qs('#categoryFilter').value = c;
-          applyFilters();
-          window.scrollTo({ top: 200, behavior: 'smooth' });
-        };
-        pillContainer.appendChild(btn);
-      });
-    }
   } catch (e) {
     console.error('Error populating categories', e);
   }
 }
 
 // ------------------------------
-// Card creation
+// Create Service Card
 // ------------------------------
 function createServiceCard(s, highlight = '') {
   const div = document.createElement('div');
-  div.className = 'card service-card';
+  div.className = 'card service-card fade-in';
+
   const imgSrc = s.image || 'images/placeholder.png';
   const titleHtml = highlightText(s.title, highlight);
   const descHtml = highlightText(s.description, highlight);
+  const whatsapp = s.contact ? `https://wa.me/${s.contact.replace(/^0/, '233')}` : '#';
+  const tel = s.contact ? `tel:${s.contact}` : '#';
+
   div.innerHTML = `
-    <img class="thumb" src="${imgSrc}" alt="${escapeHtml(s.title)}" loading="lazy">
+    <img class="thumb lazy" data-src="${imgSrc}" alt="${escapeHtml(s.title)}">
     <h3>${titleHtml}</h3>
     <p class="meta"><i class="fas fa-tags"></i> ${escapeHtml(s.category)} • 
       <i class="fas fa-university"></i> ${escapeHtml(s.university)} 
@@ -200,125 +198,81 @@ function createServiceCard(s, highlight = '') {
         <i class="fas fa-heart"></i> Fav
       </button>
     </div>
+    <div class="social-icons">
+      <a href="${whatsapp}" target="_blank" title="Chat on WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      <a href="${tel}" title="Call Provider"><i class="fas fa-phone-alt"></i></a>
+    </div>
   `;
   return div;
 }
+
+// ------------------------------
+// Utilities
+// ------------------------------
+const escapeHtml = s =>
+  String(s).replace(/[&<>"']/g, c =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])
+  );
+
+const escapeRegExp = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 function highlightText(text, q) {
   if (!q) return escapeHtml(text);
   const re = new RegExp(`(${escapeRegExp(q)})`, 'ig');
   return escapeHtml(text).replace(re, '<mark>$1</mark>');
 }
-function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, c =>
-    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])
-  );
-}
-function escapeRegExp(s) {
-  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
 
 // ------------------------------
-// Render listings
+// Lazy Load + Scroll Reveal
 // ------------------------------
-async function renderPopular() {
-  const el = qs('#popularContainer');
-  if (!el) return;
-  el.innerHTML = '';
-  try {
-    const list = (await fetchServicesFromBackend()).slice(0, 6);
-    list.forEach(s => {
-      const a = document.createElement('a');
-      a.href = `service.html?id=${s.id}`;
-      a.className = 'service-card';
-      a.innerHTML = `
-        <div style="min-height:120px;display:flex;align-items:center;justify-content:center">
-          <h4>${escapeHtml(s.title)}</h4>
-        </div>
-        <p style="margin-top:8px;color:var(--muted);font-size:0.95rem">${escapeHtml(
-          s.category
-        )}</p>
-      `;
-      el.appendChild(a);
+function lazyLoadImages() {
+  const imgs = qsa('img.lazy');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const img = entry.target;
+        img.src = img.dataset.src;
+        img.classList.remove('lazy');
+        observer.unobserve(img);
+      }
     });
-  } catch (e) {
-    el.innerHTML = `<div class="card"><p class="muted">Unable to load popular services.</p></div>`;
-  }
+  }, { threshold: 0.15 });
+  imgs.forEach(img => observer.observe(img));
 }
 
-async function loadListings() {
-  const container = qs('#listingsContainer');
-  if (!container) return;
-  container.innerHTML = `<div class="card"><p class="muted">Loading...</p></div>`;
-  const cat = qs('#categoryFilter')?.value || 'all';
-  const uni = qs('#universityFilter')?.value || 'all';
-  const q = qs('#searchInput')?.value.trim() || '';
-  const sort = qs('#sortFilter')?.value || 'relevance';
-  try {
-    const list = await fetchServicesFromBackend({
-      category: cat,
-      university: uni,
-      search: q,
-      sort
+function scrollReveal() {
+  const els = qsa('.fade-in, .about-section, .team-card');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        obs.unobserve(entry.target);
+      }
     });
-    container.innerHTML = '';
-    if (!list.length) {
-      container.innerHTML = `<div class="card"><p class="muted">No services match your filters.</p></div>`;
-      return;
-    }
-    list.forEach(s => container.appendChild(createServiceCard(s, q)));
-  } catch (e) {
-    console.error(e);
-    container.innerHTML = `<div class="card"><p class="muted">Failed to load services.</p></div>`;
-  }
+  }, { threshold: 0.15 });
+  els.forEach(el => obs.observe(el));
 }
 
 // ------------------------------
-// Filters
+// About Page Enhancements
 // ------------------------------
-function applyFilters() {
-  loadListings();
-}
-function clearFilters() {
-  qs('#categoryFilter').value = 'all';
-  qs('#universityFilter').value = 'all';
-  qs('#searchInput').value = '';
-  qs('#sortFilter').value = 'relevance';
-  loadListings();
+function initAboutPage() {
+  const hero = qs('.about-hero');
+  if (!hero) return; // not on about.html
+
+  // Animate hero title
+  hero.classList.add('fade-in');
+  scrollReveal();
+
+  // Highlight team members
+  qsa('.team-card').forEach(card => {
+    card.addEventListener('mouseenter', () => card.classList.add('active'));
+    card.addEventListener('mouseleave', () => card.classList.remove('active'));
+  });
 }
 
 // ------------------------------
-// Favorites
-// ------------------------------
-function toggleFav(id, btn) {
-  let favs = loadFavs();
-  const strId = String(id);
-  if (favs.includes(strId)) {
-    favs = favs.filter(x => x !== strId);
-    btn.classList.remove('active');
-    btn.innerHTML = '<i class="fas fa-heart"></i> Fav';
-  } else {
-    favs.push(strId);
-    btn.classList.add('active');
-    btn.innerHTML = '<i class="fas fa-heart"></i> Saved';
-  }
-  saveFavs(favs);
-}
-
-// ------------------------------
-// Homepage search
-// ------------------------------
-function searchFromHome() {
-  const q = qs('#searchBar')?.value.trim();
-  const cat = qs('#homeCategory')?.value || '';
-  const params = new URLSearchParams();
-  if (q) params.set('search', q);
-  if (cat) params.set('category', cat);
-  window.location.href = 'listings.html?' + params.toString();
-}
-
-// ------------------------------
-// Init
+// Init App
 // ------------------------------
 async function initApp() {
   startDateTime();
@@ -326,11 +280,9 @@ async function initApp() {
   initMobileMenu();
   populateUniversities();
   await populateCategories();
-  renderPopular();
-  await loadListings();
-
-  const sInput = qs('#searchInput');
-  if (sInput) sInput.addEventListener('input', () => loadListings());
+  lazyLoadImages();
+  scrollReveal();
+  initAboutPage();
 }
 
 window.addEventListener('DOMContentLoaded', initApp);
